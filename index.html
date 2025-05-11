@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aureum - Premium Headphones</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #D4AF37;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+        
+        .logo span {
+            color: #fff;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #D4AF37;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
+        }
+        
+        .hero {
+            height: 100vh;
+            
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+        
+        .hero-content h1 {
+            font-size: 60px;
+            margin-bottom: 20px;
+            color: #D4AF37;
+        }
+        
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #D4AF37;
+            color: #000;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid #D4AF37;
+        }
+        
+        .btn:hover {
+            background-color: transparent;
+            color: #D4AF37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.7);
+        }
+        
+        .featured {
+            padding: 80px 0;
+            background-color: #111;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 36px;
+            color: #D4AF37;
+        }
+        
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+        
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .product {
+            min-width: 300px;
+            margin: 0 15px;
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+        }
+        
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+            border-color: #D4AF37;
+        }
+        
+        .product-img {
+            height: 250px;
+            background-color: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .product-img img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        
+        .product:hover .product-img img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .product-price {
+            font-size: 22px;
+            font-weight: bold;
+            color: #D4AF37;
+            margin-bottom: 15px;
+        }
+        
+        .product-btn {
+            display: block;
+            text-align: center;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .product-btn:hover {
+            background-color: #D4AF37;
+            color: #000;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        }
+        
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            background-color: #333;
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-dot.active {
+            background-color: #D4AF37;
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
+        }
+        
+        .features {
+            padding: 80px 0;
+            background-color: #000;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+        }
+        
+        .feature-card:hover {
+            border-color: #D4AF37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            color: #D4AF37;
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        
+        .feature-desc {
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        footer {
+            background-color: #111;
+            padding: 50px 0 20px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #D4AF37;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .footer-links li {
+            margin: 0 15px;
+        }
+        
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #D4AF37;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #1a1a1a;
+            border-radius: 50%;
+            margin: 0 10px;
+            color: #D4AF37;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: #D4AF37;
+            color: #000;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 40px;
+            }
+            
+            .hero-content p {
+                font-size: 16px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .product {
+                min-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">AUREUM<span>Audio</span></a>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">Collections</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Experience Sound in Gold</h1>
+                <p>Discover our premium collection of headphones crafted for audiophiles who demand nothing but the best in sound quality and luxurious design.</p>
+                <a href="#" class="btn">Shop Now</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Products -->
+    <section class="featured">
+        <div class="container">
+            <h2 class="section-title">Featured Headphones</h2>
+            
+            <!-- Product Carousel -->
+            <div class="carousel">
+                <div class="carousel-container">
+                    <!-- Product 1 -->
+                    <div class="product">
+                        <div class="product-img">
+                            <img src="https://via.placeholder.com/250x250/1a1a1a/D4AF37?text=Aureum+Pro+X" alt="Aureum Pro X">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Aureum Pro X</h3>
+                            <p class="product-price">$499</p>
+                            <a href="#" class="product-btn">View Details</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 2 -->
+                    <div class="product">
+                        <div class="product-img">
+                            <img src="https://via.placeholder.com/250x250/1a1a1a/D4AF37?text=Aureum+Elite" alt="Aureum Elite">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Aureum Elite</h3>
+                            <p class="product-price">$699</p>
+                            <a href="#" class="product-btn">View Details</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 3 -->
+                    <div class="product">
+                        <div class="product-img">
+                            <img src="https://via.placeholder.com/250x250/1a1a1a/D4AF37?text=Aureum+Gold" alt="Aureum Gold">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Aureum Gold</h3>
+                            <p class="product-price">$899</p>
+                            <a href="#" class="product-btn">View Details</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 4 -->
+                    <div class="product">
+                        <div class="product-img">
+                            <img src="https://via.placeholder.com/250x250/1a1a1a/D4AF37?text=Aureum+Wireless" alt="Aureum Wireless">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Aureum Wireless</h3>
+                            <p class="product-price">$399</p>
+                            <a href="#" class="product-btn">View Details</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 5 -->
+                    <div class="product">
+                        <div class="product-img">
+                            <img src="https://via.placeholder.com/250x250/1a1a1a/D4AF37?text=Aureum+Studio" alt="Aureum Studio">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Aureum Studio</h3>
+                            <p class="product-price">$599</p>
+                            <a href="#" class="product-btn">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-nav">
+                    <div class="carousel-dot active"></div>
+                    <div class="carousel-dot"></div>
+                    <div class="carousel-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Aureum</h2>
+            
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon">🎵</div>
+                    <h3 class="feature-title">Premium Sound Quality</h3>
+                    <p class="feature-desc">Experience crystal-clear audio with our advanced acoustic technology that delivers rich, balanced sound across all frequencies.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3 class="feature-title">Luxurious Design</h3>
+                    <p class="feature-desc">Handcrafted with premium materials including genuine leather, gold accents, and precision-engineered components.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon">🔋</div>
+                    <h3 class="feature-title">Extended Battery Life</h3>
+                    <p class="feature-desc">Our wireless models offer up to 40 hours of continuous playback, so you can enjoy your music all day and night.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <a href="#" class="footer-logo">AUREUM</a>
+            
+            <ul class="footer-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Support</a></li>
+            </ul>
+            
+            <div class="social-links">
+                <a href="#"><span>📱</span></a>
+                <a href="#"><span>📘</span></a>
+                <a href="#"><span>📸</span></a>
+                <a href="#"><span>🐦</span></a>
+            </div>
+            
+            <p class="copyright">© 2023 Aureum Audio. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Simple carousel functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.querySelector('.carousel-container');
+            const dots = document.querySelectorAll('.carousel-dot');
+            let currentIndex = 0;
+            const productWidth = 330; // 300px width + 30px margin
+            
+            // Update carousel position
+            function updateCarousel() {
+                carousel.style.transform = `translateX(-${currentIndex * productWidth}px)`;
+                
+                // Update dot indicators
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+            }
+            
+            // Dot click event
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateCarousel();
+                });
+            });
+            
+            // Auto-rotate carousel
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % dots.length;
+                updateCarousel();
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
